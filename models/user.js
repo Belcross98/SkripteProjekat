@@ -9,10 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-    }
-  }
+        static associate({ Comment }) {
+            // define association here
+            this.hasMany(Comment, { foreignKey: 'userId', as: 'comments', onDelete: 'cascade', hooks: true });
+        }
+    };
   User.init({
       Username: {
           type: DataTypes.STRING,
@@ -33,5 +34,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
-  return User;
+
+return User;
 };
